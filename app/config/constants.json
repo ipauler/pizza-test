@@ -1,0 +1,8 @@
+{
+  "ORDER_STATUS": {
+    "NEW": 0,
+    "PROCRESSING": 1,
+    "DELIVERING": 2,
+    "COMPLETE": 3
+  }
+}

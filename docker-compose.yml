@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: ["/src/wait-for-it.sh", "postgres:5432", "--", "./start.sh"]
+    ports:
+      - "3030:3030"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      DB_USER: pizza
+      DB_PASSWORD: pizzapass
+      DB_NAME: pizzaDB
+      DB_HOST: postgres
+
+  postgres:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_USER: pizza
+      POSTGRES_PASSWORD: pizzapass
+      POSTGRES_DB: pizzaDB
