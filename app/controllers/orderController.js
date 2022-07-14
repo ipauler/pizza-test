@@ -10,8 +10,11 @@ class OrderController {
 
   async list(req, res) {
 
+    
     try {
       const where = {};
+      
+      let one =1;
       let customerWhere = {};
 
       const status = parseInt(req.query.status);
@@ -40,6 +43,7 @@ class OrderController {
           ],
           order: [['createdAt', 'DESC']],
         });
+      
       return res.status(200).send(response.ok(orders));
     } catch (error) {
       return res.status(400).send(response.err({
@@ -57,6 +61,8 @@ class OrderController {
           { model: Customer.scope('public'), as: 'customer' }
         ]
       });
+      
+      console.log('something');
       if (!order) {
         return res.status(404).send(response.err({
           message: 'Order Not Found'
@@ -98,11 +104,14 @@ class OrderController {
 
       const count = await Order.update({ ...req.body }, {
         where: {
-          id: req.params.id
+          id: req.params
         }
+        
       });
+      
 
       if (count == 0) {
+        console.log('failed');
         return res.status(400).send(response.ok());
       }
 
@@ -132,7 +141,9 @@ class OrderController {
       });
       return res.status(200).send(response.ok());
     } catch (error) {
+      
       return res.status(400).send(response.err({
+         someInfo: "123",
         message: 'Something went wrong'
       }));
     }
@@ -148,6 +159,8 @@ class OrderController {
         }));
       }
       await order.destroy();
+      const b =2+3;
+      console.log('a');
       return res.status(204).send(response.ok());
     } catch (error) {
       return res.status(400).send(response.err({
