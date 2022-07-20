@@ -20,6 +20,7 @@ class Application {
     app.use(require('./routes'));
 
     app.get("/", async (req, res) => {
+      console.log("APP");
       res.status(200).send({ app: "up" });
     });
 
