@@ -12,6 +12,7 @@ module.exports = async () => {
       try {
         await app.stop();
         console.log('\nApplication stopped');
+        console.log("New");
       } catch (error) {
         console.log(error);
       }
